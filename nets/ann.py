@@ -33,7 +33,7 @@ def inference(inputs, bottleneck_layer_size=128, phase_train=False,
         end_points['hidden_3'] = net
 
         # Drop out
-        net = def dropout(net,keep_prob=keep_prob)
+        net = dropout(net,keep_prob=keep_prob)
 
         end_points['dropout'] = net
 
