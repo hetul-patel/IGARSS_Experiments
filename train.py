@@ -344,7 +344,7 @@ if __name__ == '__main__':
                         checkpoint_path = os.path.join(ckpt_dir, 'model-%s.ckpt' % subdir)
                         saver.save(sess, checkpoint_path, global_step=count, write_meta_graph=False)
 
-                        metagraph_filename = os.path.join(ckpt_dir, 'model-%s.meta' % subdir
+                        metagraph_filename = os.path.join(ckpt_dir, 'model-%s.meta' % subdir)
                         if not os.path.exists(metagraph_filename):
                             saver.export_meta_graph(metagraph_filename)
 
