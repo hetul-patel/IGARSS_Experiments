@@ -6,7 +6,7 @@ def inference(inputs, bottleneck_layer_size=128, phase_train=False,
 
     end_points = {}
     
-    with tf.variable_scope( 'ANN', [inputs], reuse=reuse) as scope:
+    with tf.variable_scope( 'ANN', [inputs], reuse=reuse):
 
         # Hidden Layer 1
         net = slim.fully_connected(inputs, 300, 
