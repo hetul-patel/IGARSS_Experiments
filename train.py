@@ -359,19 +359,19 @@ if __name__ == '__main__':
                         sess.run(test_data_initializer)
 
                         while True:
-                        try:
-                            bands_for_test, labels_for_test = sess.run(test_next_element)
-                            feed_dict = {inputs: bands_for_test, labels: labels_for_test, phase_train_placeholder: False}
-                            total_loss_val, inference_loss_val, acc_val = \
-                            sess.run([total_loss, inference_loss, Accuracy_Op],
-                                    feed_dict=feed_dict)
+                            try:
+                                bands_for_test, labels_for_test = sess.run(test_next_element)
+                                feed_dict = {inputs: bands_for_test, labels: labels_for_test, phase_train_placeholder: False}
+                                total_loss_val, inference_loss_val, acc_val = \
+                                sess.run([total_loss, inference_loss, Accuracy_Op],
+                                        feed_dict=feed_dict)
 
-                            loss_array[v], xent_array[v], accuracy_array[v] = (total_loss_val, inference_loss_val, acc_val)
+                                loss_array[v], xent_array[v], accuracy_array[v] = (total_loss_val, inference_loss_val, acc_val)
 
-                        except tf.errors.OutOfRangeError:
-                            print('\nValidation Epoch: %d\tLoss %2.3f\tXent %2.3f\tAccuracy %2.3f\n' %
-                                (count, np.mean(loss_array), np.mean(xent_array), np.mean(accuracy_array)))
-                            break
+                            except tf.errors.OutOfRangeError:
+                                print('\nValidation Epoch: %d\tLoss %2.3f\tXent %2.3f\tAccuracy %2.3f\n' %
+                                    (count, np.mean(loss_array), np.mean(xent_array), np.mean(accuracy_array)))
+                                break
 
                 except tf.errors.OutOfRangeError:
                     print("End of epoch %d" % i)
