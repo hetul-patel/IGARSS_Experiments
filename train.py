@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # /usr/bin/env/python3
+# -*- coding: utf-8 -*-
+# /usr/bin/env/python3
 from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
@@ -7,6 +9,7 @@ from __future__ import division
 from nets.ann import inference
 from math import ceil as ceil
 from datetime import datetime
+import pandas as pd
 import tensorflow as tf
 import numpy as np
 import argparse
@@ -147,6 +150,9 @@ def batch_dataset(bands, labels):
     return data_initializer, next_element
 
 def load_dataset(dataset_path, test_fraction=0.2):
+  
+    print("\n----------------Loading Dataset-------------------\n")
+    
     cols = list([str(i) for i in range(392)])
     cols.append('label')
 
@@ -161,17 +167,22 @@ def load_dataset(dataset_path, test_fraction=0.2):
 
     unique_classes = np.unique(labels_array)
     total_unique_classes = len(unique_classes)
+    
+    print("Total samples [%d] Total classes [%d]\n"%(len(train_labels), total_unique_classes))
 
-    for label in unique_classes:
+    for i,label in enumerate(unique_classes):
         all_ind = np.where(labels_array == label)[0]
-
-        total_train =ceil( len(all_ind) * (1-test_fraction) )
+        
+        total_train = ceil( len(all_ind) * (1-test_fraction) )
+        
+        print("assigned_label:{}, actual_label: {}, total_samples: {}, Train: {}".format(i, label, len(all_ind), total_train))
 
         train_dataset.extend(data_array[all_ind[:total_train]])
-        train_labels.extend(train_labels[all_ind[:total_train]])
+        train_labels.extend(labels_array[all_ind[:total_train]])
 
-        test_dataset.extend(test_dataset[all_ind[total_train:]])
-        test_labels.extend(test_labels[all_ind[total_train:]])
+        test_dataset.extend(data_array[all_ind[total_train:]])
+        test_labels.extend(labels_array[all_ind[total_train:]])
+        
 
     return np.array(train_dataset), np.array(train_labels), np.array(test_dataset), np.array(test_labels), total_unique_classes
 
@@ -194,7 +205,7 @@ if __name__ == '__main__':
 
         # best create ckpt path
         ckpt_best_dir = os.path.join(log_dir, args.ckpt_best_path)
-        if not os.path.isdir(ckpt_best_path):  # Create the log directory if it doesn't exist
+        if not os.path.isdir(ckpt_best_dir):  # Create the log directory if it doesn't exist
             os.makedirs(ckpt_best_dir)
 
 
