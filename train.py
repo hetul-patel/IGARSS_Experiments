@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 # /usr/bin/env/python3
-from nets.ann import inference
 from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
+
+from nets.ann import inference
 from math import ceil as ceil
 from datetime import datetime
 import tensorflow as tf
