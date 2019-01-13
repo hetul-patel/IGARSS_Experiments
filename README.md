@@ -2,9 +2,9 @@
 
 ### Priority  = Highest
 #### graph 1 overall testing accuray ( common test data )
-- [ ] ann without augmentation ( 40 bands )
-- [ ] ann with augmentation (40 bands )
-- [ ] cnn with augmentation ( 40 bands )
+- [x] ann without augmentation ( 40 bands )
+- [x] ann with augmentation (40 bands )
+- [x] cnn with augmentation ( 40 bands )
 - [ ] pcnn with augmentation ( 40 bands )
 
 #### graph 2 class testing accuray ( common test data )
@@ -16,7 +16,7 @@
 ### Priority  = Mid
 #### Table
 - [ ] SAM
-- [ ] SVM
+- [x] SVM
 - [ ] KNN
 - [ ] ANN(40)
 - [ ] PCNN(40)
